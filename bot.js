@@ -36,7 +36,7 @@ const slashFiles = fs
 for (const file of slashFiles) {
   const slashcmd = require(`./slash/${file}`);
   client.slashcommands.set(slashcmd.data.name, slashcmd);
-  if (LOAD_SLASH) commands.push(slashcmd.data.toJSON());
+  if (LOAD_SLASH || LOAD_SLASH_GLOBAL) commands.push(slashcmd.data.toJSON());
 }
 
 if (LOAD_SLASH) {
@@ -85,13 +85,6 @@ if (LOAD_SLASH) {
 
     console.log(`Logged in as ${client.user.tag}`);
   });
-
-  // Add Database entry
-  // setTimeout(async () => {
-  //   await new testSchema({
-  //     message: "Hello World!",
-  //   }).save();
-  // }, 1000);
 
   client.on("interactionCreate", (interaction) => {
     async function handleCommand() {
