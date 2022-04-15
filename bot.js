@@ -41,40 +41,41 @@ for (const file of slashFiles) {
 
 if (LOAD_SLASH) {
   const rest = new REST({ version: "9" }).setToken(TOKEN);
-  (async () => {
-    try {
-      console.log("Deploying slash commands");
-
-      await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-        body: commands,
-      });
+  console.log("Deploying slash commands");
+  rest
+    .put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+      body: commands,
+    })
+    .then(() => {
       console.log("Successfully loaded");
       process.exit(0);
-
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  })
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      }
+    });
 } else if (LOAD_SLASH_GLOBAL) {
   const rest = new REST({ version: "9" }).setToken(TOKEN);
-  (async () => {
-    try {
-      console.log("Deploying slash commands");
-
-      await rest.put(Routes.applicationCommands(CLIENT_ID), {
-        body: commands,
-      });
-      console.log("Successfully loaded");
+  console.log("Deploying slash commands globally");
+  rest
+    .put(Routes.applicationCommands(CLIENT_ID), {
+      body: commands,
+    })
+    .then(() => {
+      console.log("Successfully loaded globally");
       process.exit(0);
-
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  })
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      }
+    });
 } else {
   client.on("ready", async () => {
+
     // Connect to Database
     // await mongoose.connect(process.env.MONGO_URI, {
     //   keepAlive: true,
