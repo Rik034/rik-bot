@@ -99,4 +99,5 @@ if (LOAD_SLASH) {
     handleCommand();
   });
   client.login(TOKEN);
+  
 }
