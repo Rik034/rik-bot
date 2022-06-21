@@ -4,7 +4,7 @@ const axios = require("axios");
 const fs = require("fs");
 
 const API_KEY = process.env.RIOT_API_KEY;
-const DDragon = "https://ddragon.leagueoflegends.com/cdn/12.6.1";
+const DDragon = "https://ddragon.leagueoflegends.com/cdn/12.11.1";
 
 const APICall = "https://euw1.api.riotgames.com/lol";
 
